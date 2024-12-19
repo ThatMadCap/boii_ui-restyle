@@ -22,6 +22,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Dancing+Script&family=Nova+Square&family=Oswald&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 @font-face {
     font-family: 'Digital';
@@ -57,6 +58,29 @@
     --dark_theme_toggle_slider_bg_colour: rgba(214, 214, 214, 1);
     --dark_theme_toggle_slider_active_bg_colour: rgba(61, 162, 155, 1);
     --dark_theme_settings_button_bg_colour: rgba(61, 162, 155, 1);
+
+    /* yume theme */
+    --yume_theme_text_colour: rgba(242, 242, 242, 1);
+    --yume_theme_bg_colour: rgba(23, 23, 23, 0.9);
+    --yume_theme_dock_bg_colour: rgba(23, 23, 23, 0.9);
+    --yume_theme_settings_items_bg_colour: rgba(23, 23, 23, 0.2);
+    --yume_theme_menu_item_active_bg_colour: rgba(23, 23, 23, 0.4);
+    --yume_theme_wifi_name_colour: rgba(43, 120, 252, 1);
+    --yume_theme_settings_stat_colour: rgba(193, 193, 193, 0.7);
+    --yume_theme_toggle_slider_bg_colour: rgba(242, 242, 242, 1);
+    --yume_theme_toggle_slider_active_bg_colour: rgba(43, 120, 252, 1);
+    --yume_theme_settings_button_bg_colour: rgba(43, 120, 252, 1);
+
+    --yume_white: #F2F2F2;
+    --yume_grey: #C1C1C1;
+    --yume_grey2: #6C6C6C;
+    --yume_black: #171717;
+    --yume_black2: rgba(23, 23, 23, 0.9);
+    --yume_orange: #FB8607;
+    --yume_pink: #FE247B;
+    --yume_blue: #2B78FC;
+    --yume_green: #06CE6B;
+    --yume_red: #FE2436;
 }
 
 
@@ -140,4 +164,47 @@
 
 .dark_theme .settings_button {
     background-color: var(--dark_theme_settings_button_bg_colour);
+}
+
+/* yume theme */
+.yume_theme .tablet_screen {
+    color: var(--yume_theme_text_colour);
+    background-color: var(--yume_theme_bg_colour);
+}
+
+.yume_theme .dock_container {
+    background-color: var(--yume_theme_dock_bg_colour);
+}
+
+.yume_theme .menu_item,
+.yume_theme .content_group {
+    background-color: var(--yume_theme_settings_items_bg_colour);
+}
+
+.yume_theme .menu_item.active {
+    background-color: var(--yume_theme_menu_item_active_bg_colour);
+}
+
+.yume_theme .menu_item:not(.disabled):hover {
+    background-color: var(--yume_theme_menu_item_active_bg_colour);
+}
+
+.yume_theme .wifi_name {
+    color: var(--yume_theme_wifi_name_colour);
+}
+
+.yume_theme .settings_stat_name {
+    color: var(--yume_theme_settings_stat_colour);
+}
+
+.yume_theme .toggle_slider {
+    background-color: var(--yume_theme_toggle_slider_bg_colour);
+}
+
+.yume_theme input:checked + .toggle_slider {
+    background-color: var(--yume_theme_toggle_slider_active_bg_colour);
+}
+
+.yume_theme .settings_button {
+    background-color: var(--yume_theme_settings_button_bg_colour);
 }

@@ -47,15 +47,29 @@ class ActionMenu {
 
         actions.forEach((action, index) => {
             let action_html = $('<div>').addClass('action').data('id', action.label);
-            let colour = action.colour || '#b4b4b4';
-            let label_html = `<span class="label" style="box-shadow: 2px 3px 3px #0d0c0c, -2px -3px 4px ${colour};">${action.label}</span>`;
-            let icon_html = `<span class="icon" style="box-shadow: 2px 3px 3px #0d0c0c, -2px -3px 4px ${colour}; color: ${colour};"><i class="${action.icon}"></i></span>`;
+            let colour = action.colour || '#F2F2F2';
+
+            let action_item = $('<div>').addClass('action_item').css({
+                /* 'box-shadow': `2px 3px 3px #0d0c0c, -2px -3px 4px ${colour}`, */
+                'background': 'linear-gradient(to right, rgba(23, 23, 23, 0.9), rgba(23, 23, 23, 0.9));',
+                'padding': '5px',
+                'border-radius': '4px',
+                'display': 'flex',
+                'align-items': 'center',
+                'color': 'var(--yume_white)',
+                'cursor': 'pointer'
+            });
+
+            let label_html = `<div class="label">${action.label}</div>`;
+            let icon_html = `<div class="icon" style="color: ${colour};"><i class="${action.icon}"></i></div>`;
+
+            action_item.html(icon_html + label_html);
+
             action_html.on('click', () => this.handle_action_click(action));
+            action_html.append(action_item);
             if (index % 2 === 0) {
-                action_html.html(`<div class="label_container">${icon_html}${label_html}</div>`);
                 menu_right.append(action_html);
             } else {
-                action_html.html(`<div class="label_container">${label_html}${icon_html}</div>`);
                 menu_left.append(action_html);
             }
         });
@@ -110,8 +124,8 @@ class ActionMenu {
     }
 }
 
-/*
-$(document).ready(function() {
+
+/* $(document).ready(function() {
     const test_menu = [
         {
             label: "Level 1",
@@ -167,5 +181,5 @@ $(document).ready(function() {
 
     const test_action_menu = new ActionMenu();
     test_action_menu.create_menu(test_menu);
-});
-*/
+}); */
+
