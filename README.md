@@ -1,5 +1,194 @@
 # BOII | Development - Utility: UI Elements
 
+---
+### Action Menu Restyle
+![Screenshot_1](https://github.com/user-attachments/assets/aeb6c237-c466-43e8-9411-5c48f5456366)
+
+<summary>Action Menu Snippet (Click to Expand)</summary>
+<details>
+
+```lua
+-- Here's a snippet for a test menu
+-- "F1" to open the menu (requires ox_lib)
+-- or use the command "/boii_radial_test"
+
+local test_menu = {
+  {
+      label = 'Level 1',
+      icon = 'fa-solid fa-sitemap',
+      colour = 'red',
+      submenu = {
+          {
+              label = 'Level 2',
+              icon = 'fa-solid fa-crown',
+              colour = 'pink',
+              submenu = {
+                  {
+                      label = 'Level 3',
+                      icon = 'fa-solid fa-truck-moving',
+                      colour = 'yellow',
+                      submenu = {
+                          {
+                              label = 'Level 4',
+                              icon = 'fa-solid fa-boxes',
+                              colour = 'green',
+                              submenu = {
+                                  {
+                                      label = 'Level 5',
+                                      icon = 'fa-solid fa-map-marked-alt',
+                                      colour = 'blue',
+                                      submenu = {
+                                          {
+                                              label = 'Confirm',
+                                              icon = 'fa-solid fa-check-circle',
+                                              colour = 'purple',
+                                              action_type = 'client',
+                                              action = 'example_event',
+                                              params = { example_param = 'example_value' }
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      }
+  },
+  {
+      label = 'Police',
+      icon = 'fa-solid fa-sitemap',
+      submenu = {
+          {
+              label = 'Fingerprint',
+              icon = 'fa-solid fa-shield-halved',
+              colour = '#000000', -- hex
+              action_type = 'client',
+              action = 'example_event',
+              params = { example_param = 'example_value' }
+          },
+          {
+              label = 'Handcuff',
+              icon = 'fa-solid fa-handcuffs',
+              colour = '#FF5733', -- hex
+              action_type = 'client',
+              action = 'example_event',
+              params = { example_param = 'example_value' }
+          },
+          {
+              label = 'Jail',
+              icon = 'fa-solid fa-bus',
+              colour = 'purple', -- named colour
+              action_type = 'client',
+              action = 'example_event',
+              params = { example_param = 'example_value' }
+          },
+          {
+              label = 'Frisk',
+              icon = 'fa-solid fa-hand',
+              colour = 'rgb(0, 128, 255, 150)', -- rgb/rgba
+              action_type = 'client',
+              action = 'example_event',
+              params = { example_param = 'example_value' }
+          },
+          {
+              label = 'Search',
+              icon = 'fa-solid fa-magnifying-glass',
+              colour = 'hsl(200, 100%, 50%)', -- hsl/hsla
+              action_type = 'client',
+              action = 'example_event',
+              params = { example_param = 'example_value' }
+          },
+          {
+              label = 'Covert Operations',
+              icon = 'fa-solid fa-person-military-rifle',
+              colour = 'black',
+              submenu = {
+                  {
+                      label = 'Raid Container',
+                      icon = 'fa-solid fa-box-archive',
+                      colour = 'black',
+                      action_type = 'client',
+                      action = 'example_event',
+                      params = { example_param = 'example_value' }
+                  },
+                  {
+                      label = 'Overthrow the Government',
+                      icon = 'fa-solid fa-person-rifle',
+                      colour = 'red',
+                      action_type = 'client',
+                      action = 'example_event',
+                      params = { example_param = 'example_value' }
+                  }
+              }
+          }
+      }
+  }
+}
+
+
+local isOpen = false
+local isDisabled = false
+
+local function hideRadial()
+	if not isOpen then return end
+	lib.resetNuiFocus()
+	isOpen = false
+end
+
+local function disableRadial(state)
+    isDisabled = state
+
+    if isOpen and state then
+        return hideRadial()
+    end
+end
+
+lib.addKeybind({
+	name = 'boii_ui_radial',
+	description = "Open boii_ui Radial Menu",
+	defaultKey = 'f1',
+	onPressed = function()
+    	if isDisabled then return end
+
+    	if isOpen then return end
+
+		if IsNuiFocused() or IsPauseMenuActive() then return end
+
+    	isOpen = true
+
+    	lib.setNuiFocus(true)
+    	SetCursorLocation(0.5, 0.5)
+
+		-- open action menu
+    	exports.boii_ui:action_menu(test_menu)
+
+    	while isOpen do
+    		DisablePlayerFiring(cache.playerId, true)
+    		DisableControlAction(0, 1, true)
+    		DisableControlAction(0, 2, true)
+    		DisableControlAction(0, 142, true)
+    		DisableControlAction(2, 199, true)
+    		DisableControlAction(2, 200, true)
+    		Wait(0)
+    	end
+	end,
+	onReleased = function()
+		hideRadial()
+	end
+})
+
+RegisterCommand('boii_radial_test', function()
+	SetNuiFocus(true, true)
+	exports.boii_ui:action_menu(test_menu)
+end, false)
+```
+
+</details>
+
+---
+
 Introducing our comprehensive UI Suite designed to enhance roleplay and interaction within your FiveM server. 
 
 This resource includes a set of essential UI elements:
